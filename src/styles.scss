@@ -99,12 +99,12 @@ form {
     border-radius: 4px;
     line-height: 1.8rem;
     padding: var(--spacingStack) var(--spacingInline);
+  }
 
-    &:hover,
-    &:focus,
-    &:active {
-      border: 1px solid #66afe9;
-    }
+  input::hover,
+  input::focus,
+  input::active {
+    border: 1px solid #66afe9;
   }
 
   .caption {
