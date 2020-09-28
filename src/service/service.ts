@@ -1,3 +1,6 @@
+import { onLoading, stopLoading } from './../commons/loading'
+import { clearError, onError } from './../commons/errohandler'
+
 class Service {
   protected apiUrl: string
   constructor(apiUrl = '') {
@@ -8,16 +11,29 @@ class Service {
     installments: number,
     mdr: number,
     days?: number[],
-  ): Promise<any> =>
-    await (
-      await fetch(this.apiUrl, {
+  ): Promise<any> => {
+    try {
+      clearError()
+      onLoading()
+      const res = await fetch(this.apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ amount, installments, mdr, days }),
       })
-    ).json()
+      if (res.status !== 200) {
+        const { message } = await res.json()
+        throw { status: res.status, message }
+      }
+      return await res.json()
+    } catch (e) {
+      onError(e)
+      throw e
+    } finally {
+      stopLoading()
+    }
+  }
 }
 
 export const service = new Service(process.env.API_URL)

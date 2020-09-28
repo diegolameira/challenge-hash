@@ -14,7 +14,7 @@ function render() {
 
   form?.addEventListener(
     'blur',
-    () => {
+    async () => {
       const data: any = {}
 
       new FormData(form).forEach((v, k) => {
@@ -23,17 +23,19 @@ function render() {
 
       if (Object.values(data).filter(Boolean).length >= 3) {
         const { amount, installments, mdr } = data
-        service
-          .calculate(amount, installments, mdr, days)
-          .then((res) => {
-            return days.map((v) => res[v])
+        try {
+          let res = await service.calculate(amount, installments, mdr, days)
+          res = days.map((v) => res[v])
+          const report = form.querySelectorAll('p > strong')
+          report.forEach((el, key) => {
+            el.innerHTML = toCurrency(res[key], true)
           })
-          .then((res) => {
-            const report = form.querySelectorAll('p > strong')
-            report.forEach((el, key) => {
-              el.innerHTML = toCurrency(res[key], true)
-            })
+        } catch (e) {
+          const report = form.querySelectorAll('p > strong')
+          report.forEach((el, key) => {
+            el.innerHTML = toCurrency('0', true)
           })
+        }
       }
     },
     true,
