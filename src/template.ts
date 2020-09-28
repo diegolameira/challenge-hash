@@ -6,16 +6,16 @@ export const Template = `
       </header>
       <div class="form-control">
         <label>Informe o valor da venda *</label>
-        <input type="text" name="amount" />
+        <input type="text" inputmode="numeric" name="amount" />
       </div>
       <div class="form-control">
         <label>Em quantas parcelas *</label>
-        <input type="number" name="installments" />
+        <input type="number" inputmode="numeric" name="installments" />
         <div class="caption">Máximo de 12 parcelas</div>
       </div>
       <div class="form-control">
         <label>Informe o percentual de MDR *</label>
-        <input type="text" name="mdr" />
+        <input type="text" inputmode="decimal" name="mdr" />
       </div>
     </main>
     <aside>
