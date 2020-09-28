@@ -6,7 +6,7 @@ export const Template = `
       </header>
       <div class="form-control">
         <label>Informe o valor da venda *</label>
-        <input type="text" inputmode="numeric" name="amount" />
+        <input type="text" inputmode="numeric" name="amount" placeholder="R$ 0,00" />
       </div>
       <div class="form-control">
         <label>Em quantas parcelas *</label>
