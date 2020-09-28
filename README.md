@@ -35,6 +35,6 @@ The code is so clean that I think it doesnt need any documentation.
 
 I could use webpack, axios, formatters, etc. But again, I got KISS here.
 
-## Portugues original challenge paper
+## Portuguese original challenge paper
 
 [Read the challenge paper](./CHALLENGE.md)
